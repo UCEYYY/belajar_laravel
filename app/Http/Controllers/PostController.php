@@ -27,9 +27,9 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required',
-            'content' => 'required',
-            'gambar' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         $post = new Post();
@@ -45,15 +45,16 @@ class PostController extends Controller
 
         $post->save();
 
-        return redirect()->route('index')->with('success', 'Post created successfully.');
+        // Ubah ke posts.index
+        return redirect()->route('posts.index')->with('success', 'Post created successfully.');
     }
 
     public function update(Request $request, $id)
     {
         $request->validate([
-            'title' => 'required',
-            'content' => 'required',
-            'gambar' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         $post = Post::findOrFail($id);
@@ -69,7 +70,8 @@ class PostController extends Controller
 
         $post->save();
 
-        return redirect()->route('index')->with('success', 'Post updated successfully.');
+        // Ubah ke posts.index
+        return redirect()->route('posts.index')->with('success', 'Post updated successfully.');
     }
 
     public function show(Post $post)
@@ -82,6 +84,7 @@ class PostController extends Controller
         $post = Post::findOrFail($id);
         $post->delete();
 
-        return redirect()->route('index')->with('success', 'Post deleted successfully.');
+        // Ubah ke posts.index
+        return redirect()->route('posts.index')->with('success', 'Post deleted successfully.');
     }
 }

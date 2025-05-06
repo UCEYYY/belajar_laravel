@@ -41,4 +41,4 @@ Route::get('/user/{id}', function ($id) {
 })->where('id', '[a-zA-Z]{2}[0-9]+');
 
 // Resource controller untuk Post
-Route::resource('index', PostController::class);
+Route::resource('posts', PostController::class);
